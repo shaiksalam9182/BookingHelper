@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">BookingHelper</string>
+    <string name="accessibility_service_description">Helps in filling booking forms with saved data.</string>
+</resources>
