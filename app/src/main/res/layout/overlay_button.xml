@@ -1,14 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:padding="8dp">
+    android:orientation="horizontal"
+    android:background="@android:color/transparent"
+    android:padding="4dp">
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btn_fill"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="4dp"
         android:src="@android:drawable/ic_menu_edit"
+        app:fabSize="mini"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:contentDescription="Fill Form" />
 
-</FrameLayout>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btn_close"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:src="@android:drawable/ic_menu_close_clear_cancel"
+        app:fabSize="mini"
+        app:backgroundTint="@android:color/holo_red_light"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:contentDescription="Close Overlay" />
+
+</LinearLayout>

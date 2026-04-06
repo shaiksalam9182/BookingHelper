@@ -6,7 +6,6 @@ import android.graphics.PixelFormat
 import android.os.Build
 import android.os.IBinder
 import android.view.*
-import android.widget.FrameLayout
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.mine.bookinghelper.R
 import kotlin.math.abs
@@ -15,6 +14,7 @@ class FloatingOverlayService : Service() {
 
     private lateinit var windowManager: WindowManager
     private var overlayView: View? = null
+    private lateinit var params: WindowManager.LayoutParams
 
     override fun onCreate() {
         super.onCreate()
@@ -23,24 +23,33 @@ class FloatingOverlayService : Service() {
         val layoutInflater = LayoutInflater.from(this)
         overlayView = layoutInflater.inflate(R.layout.overlay_button, null)
 
-        val params = WindowManager.LayoutParams(
+        params = WindowManager.LayoutParams(
             WindowManager.LayoutParams.WRAP_CONTENT,
             WindowManager.LayoutParams.WRAP_CONTENT,
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
                 WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
             else
                 @Suppress("DEPRECATION") WindowManager.LayoutParams.TYPE_PHONE,
-            WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
+            WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN,
             PixelFormat.TRANSLUCENT
         ).apply {
             gravity = Gravity.TOP or Gravity.START
-            x = 0
+            x = 100
             y = 100
         }
 
         val btnFill = overlayView!!.findViewById<FloatingActionButton>(R.id.btn_fill)
+        val btnClose = overlayView!!.findViewById<FloatingActionButton>(R.id.btn_close)
+
+        btnFill.setOnClickListener {
+            sendFillBroadcast()
+        }
+
+        btnClose.setOnClickListener {
+            stopSelf()
+        }
         
-        // Touch listener for dragging
+        // Touch listener for dragging on the main layout container
         overlayView!!.setOnTouchListener(object : View.OnTouchListener {
             private var initialX = 0
             private var initialY = 0
@@ -54,15 +63,6 @@ class FloatingOverlayService : Service() {
                         initialY = params.y
                         initialTouchX = event.rawX
                         initialTouchY = event.rawY
-                        return true
-                    }
-                    MotionEvent.ACTION_UP -> {
-                        val diffX = abs(event.rawX - initialTouchX)
-                        val diffY = abs(event.rawY - initialTouchY)
-                        if (diffX < 10 && diffY < 10) {
-                            // It's a click
-                            sendFillBroadcast()
-                        }
                         return true
                     }
                     MotionEvent.ACTION_MOVE -> {
@@ -81,6 +81,8 @@ class FloatingOverlayService : Service() {
 
     private fun sendFillBroadcast() {
         val intent = Intent(BookingAccessibilityService.ACTION_FILL_FORM)
+        // Ensure the package name is specified for safety and visibility
+        intent.setPackage(packageName)
         sendBroadcast(intent)
     }
 
