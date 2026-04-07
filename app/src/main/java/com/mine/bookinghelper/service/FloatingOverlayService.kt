@@ -42,6 +42,7 @@ class FloatingOverlayService : Service() {
         val btnClose = overlayView!!.findViewById<FloatingActionButton>(R.id.btn_close)
 
         btnFill.setOnClickListener {
+            android.util.Log.d("FloatingOverlay", "Fill button clicked")
             sendFillBroadcast()
         }
 

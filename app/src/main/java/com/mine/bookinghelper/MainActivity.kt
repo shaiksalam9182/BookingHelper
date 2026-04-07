@@ -158,7 +158,9 @@ class MainActivity : AppCompatActivity() {
         }
 
         val intent = Intent(this, FloatingOverlayService::class.java)
+        // For simplicity in this helper, we'll just start it. 
+        // The service itself has a close button to stop.
         startService(intent)
-        Toast.makeText(this, "Overlay started", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "Overlay started. Look for the floating icon!", Toast.LENGTH_SHORT).show()
     }
 }

@@ -30,17 +30,16 @@ class BookingAccessibilityService : AccessibilityService() {
 
     private val receiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
-            Log.d(TAG, "📡 Broadcast received: ${intent?.action}")
+            Log.d(TAG, "📡 Broadcast received in onReceive: ${intent?.action}")
             if (intent?.action == ACTION_FILL_FORM) {
                 fillForm()
             }
         }
     }
 
-    override fun onServiceConnected() {
-        super.onServiceConnected()
-        Log.d(TAG, "🚀 Service Connected and Ready")
-        
+    override fun onCreate() {
+        super.onCreate()
+        Log.d(TAG, "🚀 onCreate: Registering Receiver")
         val filter = IntentFilter(ACTION_FILL_FORM)
         try {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
@@ -49,10 +48,15 @@ class BookingAccessibilityService : AccessibilityService() {
                 @Suppress("UnspecifiedRegisterReceiverFlag")
                 registerReceiver(receiver, filter)
             }
-            Log.d(TAG, "✅ Receiver registered successfully")
+            Log.d(TAG, "✅ Receiver registered successfully in onCreate")
         } catch (e: Exception) {
-            Log.e(TAG, "❌ Failed to register receiver", e)
+            Log.e(TAG, "❌ Failed to register receiver in onCreate", e)
         }
+    }
+
+    override fun onServiceConnected() {
+        super.onServiceConnected()
+        Log.d(TAG, "🔗 onServiceConnected")
     }
 
     override fun onAccessibilityEvent(event: AccessibilityEvent?) {}
@@ -61,6 +65,7 @@ class BookingAccessibilityService : AccessibilityService() {
 
     override fun onDestroy() {
         super.onDestroy()
+        Log.d(TAG, "💀 onDestroy: Unregistering Receiver")
         try {
             unregisterReceiver(receiver)
         } catch (e: Exception) {
@@ -81,7 +86,7 @@ class BookingAccessibilityService : AccessibilityService() {
 
             val rootNode = rootInActiveWindow
             if (rootNode == null) {
-                Log.e(TAG, "❌ rootInActiveWindow is NULL. Is the app protecting its content?")
+                Log.e(TAG, "❌ rootInActiveWindow is NULL. Current app might be blocking accessibility.")
                 Toast.makeText(applicationContext, "Cannot access screen. Check permissions.", Toast.LENGTH_SHORT).show()
                 return@launch
             }
