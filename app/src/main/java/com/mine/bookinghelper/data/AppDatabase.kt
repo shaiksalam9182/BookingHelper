@@ -4,9 +4,10 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.mine.bookinghelper.model.UserDetail
+import com.mine.bookinghelper.model.GeneralDetails
+import com.mine.bookinghelper.model.PersonDetail
 
-@Database(entities = [UserDetail::class], version = 1, exportSchema = false)
+@Database(entities = [GeneralDetails::class, PersonDetail::class], version = 2, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun userDetailDao(): UserDetailDao
 
@@ -20,7 +21,9 @@ abstract class AppDatabase : RoomDatabase() {
                     context.applicationContext,
                     AppDatabase::class.java,
                     "booking_database"
-                ).build()
+                )
+                .fallbackToDestructiveMigration()
+                .build()
                 INSTANCE = instance
                 instance
             }
