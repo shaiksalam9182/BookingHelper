@@ -5,8 +5,8 @@
     android:layout_height="wrap_content"
     android:layout_marginBottom="16dp"
     app:cardCornerRadius="16dp"
-    app:cardElevation="0dp"
-    app:cardBackgroundColor="#FFFFFF"
+    app:cardElevation="2dp"
+    app:cardBackgroundColor="@color/white"
     app:strokeWidth="1dp"
     app:strokeColor="#D1D9E6">
 
@@ -20,12 +20,12 @@
             android:id="@+id/tv_person_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="PERSON DETAILS"
+            android:text="PILGRIM"
             android:textStyle="bold"
-            android:textColor="#3F51B5"
+            android:textColor="@color/indigo"
             android:layout_marginBottom="12dp"
             android:textSize="13sp"
-            android:letterSpacing="0.1" />
+            android:letterSpacing="0.08" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
@@ -33,19 +33,20 @@
             android:hint="Full Name"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_marginBottom="8dp"
-            app:boxBackgroundColor="#FFFFFF">
+            app:boxBackgroundColor="@color/white">
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/et_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="#2C3E50"
+                android:textColor="@color/text_primary"
                 android:singleLine="true" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp">
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="0dp"
@@ -53,45 +54,45 @@
                 android:layout_weight="1"
                 android:hint="Age"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                app:boxBackgroundColor="#FFFFFF">
+                app:boxBackgroundColor="@color/white">
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/et_age"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="number"
-                    android:textColor="#2C3E50" />
+                    android:textColor="@color/text_primary" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1.5"
+                android:layout_weight="1.6"
                 android:layout_marginStart="8dp"
                 android:hint="Gender"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                app:boxBackgroundColor="#FFFFFF">
+                app:boxBackgroundColor="@color/white">
                 <AutoCompleteTextView
                     android:id="@+id/act_gender"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="none"
-                    android:textColor="#2C3E50" />
+                    android:textColor="@color/text_primary" />
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Photo ID Proof"
+            android:hint="Photo ID Type"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-            android:layout_marginTop="8dp"
-            app:boxBackgroundColor="#FFFFFF">
+            android:layout_marginBottom="8dp"
+            app:boxBackgroundColor="@color/white">
             <AutoCompleteTextView
                 android:id="@+id/act_id_type"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="none"
-                android:textColor="#2C3E50" />
+                android:textColor="@color/text_primary" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -99,13 +100,12 @@
             android:layout_height="wrap_content"
             android:hint="ID Number"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_marginTop="8dp"
-            app:boxBackgroundColor="#FFFFFF">
+            app:boxBackgroundColor="@color/white">
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/et_id_number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="#2C3E50"
+                android:textColor="@color/text_primary"
                 android:singleLine="true" />
         </com.google.android.material.textfield.TextInputLayout>
 

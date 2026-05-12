@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F0F3F5">
+    android:background="@color/screen_bg">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -11,99 +11,323 @@
         android:orientation="vertical"
         android:padding="16dp">
 
+        <!-- Header -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Profile Manager"
-            android:textSize="24sp"
-            android:textColor="#1A237E"
+            android:text="BookingHelper"
+            android:textSize="26sp"
+            android:textColor="@color/indigo_dark"
             android:textStyle="bold"
-            android:layout_marginBottom="4dp" />
+            android:layout_marginBottom="2dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Configure your one-tap filling profiles."
+            android:text="Auto-fill profiles for TTD booking"
             android:textSize="14sp"
-            android:textColor="#546E7A"
-            android:layout_marginBottom="24dp" />
+            android:textColor="@color/text_secondary"
+            android:layout_marginBottom="20dp" />
 
+        <!-- ── Setup Card ─────────────────────────────────────── -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="2dp"
+            app:cardBackgroundColor="@color/indigo_light"
+            app:strokeColor="@color/indigo"
+            app:strokeWidth="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="SETUP &amp; PERMISSIONS"
+                    android:textStyle="bold"
+                    android:textColor="@color/indigo_dark"
+                    android:textSize="12sp"
+                    android:letterSpacing="0.08"
+                    android:layout_marginBottom="14dp" />
+
+                <!-- Accessibility Service row -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="10dp">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Accessibility Service"
+                            android:textColor="@color/text_primary"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tv_acc_status"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="● Not enabled"
+                            android:textSize="12sp"
+                            android:textColor="@color/status_warn" />
+                    </LinearLayout>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_enable_accessibility"
+                        android:layout_width="wrap_content"
+                        android:layout_height="36dp"
+                        android:text="OPEN SETTINGS"
+                        android:textSize="11sp"
+                        app:cornerRadius="8dp"
+                        app:backgroundTint="@color/indigo"
+                        android:textColor="@color/white" />
+                </LinearLayout>
+
+                <!-- Overlay Permission row -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="14dp">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Draw Over Apps"
+                            android:textColor="@color/text_primary"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tv_overlay_status"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="● Not granted"
+                            android:textSize="12sp"
+                            android:textColor="@color/status_warn" />
+                    </LinearLayout>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_grant_overlay"
+                        android:layout_width="wrap_content"
+                        android:layout_height="36dp"
+                        android:text="GRANT"
+                        android:textSize="11sp"
+                        app:cornerRadius="8dp"
+                        app:backgroundTint="@color/indigo"
+                        android:textColor="@color/white" />
+                </LinearLayout>
+
+                <!-- Start Floating Bar -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_start_overlay"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:text="SHOW FLOATING BAR"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    app:cornerRadius="10dp"
+                    app:backgroundTint="@color/indigo"
+                    app:icon="@android:drawable/ic_menu_add"
+                    app:iconTint="@color/white" />
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- ── Pilgrim Count ──────────────────────────────────── -->
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Number of Active Pilgrims"
+            android:hint="Number of Pilgrims"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-            android:layout_marginBottom="20dp"
-            app:boxStrokeColor="#3498DB"
-            app:hintTextColor="#2980B9">
+            android:layout_marginBottom="16dp"
+            app:boxBackgroundColor="@color/white"
+            app:boxStrokeColor="@color/indigo"
+            app:hintTextColor="@color/indigo">
+
             <AutoCompleteTextView
                 android:id="@+id/act_person_count"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="none"
-                android:textColor="#2C3E50"
-                android:backgroundTint="#FFFFFF"/>
+                android:textColor="@color/text_primary"
+                android:backgroundTint="@color/white" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Person Sections Container -->
+        <!-- ── Person Cards ───────────────────────────────────── -->
         <LinearLayout
             android:id="@+id/container_persons"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <!-- Person Template (IDs: 1 to 4) -->
             <include layout="@layout/item_person_card" android:id="@+id/person_card_1" />
             <include layout="@layout/item_person_card" android:id="@+id/person_card_2" />
             <include layout="@layout/item_person_card" android:id="@+id/person_card_3" />
             <include layout="@layout/item_person_card" android:id="@+id/person_card_4" />
         </LinearLayout>
 
-        <!-- General Details Card -->
+        <!-- ── General Details Card ──────────────────────────── -->
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
+            android:layout_marginBottom="20dp"
             app:cardCornerRadius="16dp"
-            app:cardElevation="2dp">
-            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="16dp">
-                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="COMMON ADDRESS" android:textStyle="bold" android:textColor="#7F8C8D" android:layout_marginBottom="12dp" android:textSize="12sp"/>
-                <com.google.android.material.textfield.TextInputLayout android:layout_width="match_parent" android:hint="Email" style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox" android:layout_height="wrap_content" android:layout_marginBottom="8dp" app:boxBackgroundColor="#FFFFFF"><com.google.android.material.textfield.TextInputEditText android:id="@+id/et_email" android:layout_width="match_parent" android:layout_height="wrap_content" android:textColor="#2C3E50"/></com.google.android.material.textfield.TextInputLayout>
-                <com.google.android.material.textfield.TextInputLayout android:layout_width="match_parent" android:hint="City" style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox" android:layout_height="wrap_content" android:layout_marginBottom="8dp" app:boxBackgroundColor="#FFFFFF"><com.google.android.material.textfield.TextInputEditText android:id="@+id/et_city" android:layout_width="match_parent" android:layout_height="wrap_content" android:textColor="#2C3E50"/></com.google.android.material.textfield.TextInputLayout>
-                <com.google.android.material.textfield.TextInputLayout android:layout_width="match_parent" android:hint="State" style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox" android:layout_height="wrap_content" android:layout_marginBottom="8dp" app:boxBackgroundColor="#FFFFFF"><com.google.android.material.textfield.TextInputEditText android:id="@+id/et_state" android:layout_width="match_parent" android:layout_height="wrap_content" android:textColor="#2C3E50"/></com.google.android.material.textfield.TextInputLayout>
-                <com.google.android.material.textfield.TextInputLayout android:layout_width="match_parent" android:hint="Country" style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox" android:layout_height="wrap_content" android:layout_marginBottom="8dp" app:boxBackgroundColor="#FFFFFF"><com.google.android.material.textfield.TextInputEditText android:id="@+id/et_country" android:layout_width="match_parent" android:layout_height="wrap_content" android:textColor="#2C3E50"/></com.google.android.material.textfield.TextInputLayout>
-                <com.google.android.material.textfield.TextInputLayout android:layout_width="match_parent" android:hint="Pincode" style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox" android:layout_height="wrap_content" app:boxBackgroundColor="#FFFFFF"><com.google.android.material.textfield.TextInputEditText android:id="@+id/et_pincode" android:layout_width="match_parent" android:layout_height="wrap_content" android:textColor="#2C3E50" android:inputType="number"/></com.google.android.material.textfield.TextInputLayout>
+            app:cardElevation="2dp"
+            app:cardBackgroundColor="@color/white">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="COMMON DETAILS"
+                    android:textStyle="bold"
+                    android:textColor="@color/text_secondary"
+                    android:layout_marginBottom="12dp"
+                    android:textSize="12sp"
+                    android:letterSpacing="0.08" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Email"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_marginBottom="8dp"
+                    app:boxBackgroundColor="@color/white">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/text_primary"
+                        android:inputType="textEmailAddress" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="City"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_marginBottom="8dp"
+                    app:boxBackgroundColor="@color/white">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_city"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/text_primary" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="State"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_marginBottom="8dp"
+                    app:boxBackgroundColor="@color/white">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_state"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/text_primary" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Country"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_marginBottom="8dp"
+                    app:boxBackgroundColor="@color/white">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_country"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/text_primary" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Pincode"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    app:boxBackgroundColor="@color/white">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_pincode"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/text_primary"
+                        android:inputType="number" />
+                </com.google.android.material.textfield.TextInputLayout>
+
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
+        <!-- ── Save Button ────────────────────────────────────── -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_save"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
+            android:layout_height="52dp"
             android:text="SAVE ALL DETAILS"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/white"
             android:textStyle="bold"
             app:cornerRadius="12dp"
-            app:backgroundTint="#3F51B5"
-            android:layout_marginTop="16dp" />
+            app:backgroundTint="@color/indigo"
+            android:layout_marginBottom="4dp" />
 
-        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+        <!-- ── Utility Buttons ────────────────────────────────── -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="24dp">
+
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_enable_keyboard"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="SETUP KEYBOARD"
-                android:textColor="#3F51B5" />
+                android:layout_marginEnd="6dp"
+                android:text="KEYBOARD SETUP"
+                android:textColor="@color/indigo"
+                app:strokeColor="@color/indigo" />
+
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_wipe"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:layout_marginStart="6dp"
                 android:text="WIPE ALL DATA"
-                android:textColor="#E74C3C" />
+                android:textColor="@color/red"
+                app:strokeColor="@color/red" />
         </LinearLayout>
 
     </LinearLayout>

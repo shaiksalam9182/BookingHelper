@@ -2,4 +2,23 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="screen_bg">#F0F3F5</color>
+
+    <!-- Text -->
+    <color name="text_primary">#1A1C1E</color>
+    <color name="text_secondary">#44474F</color>
+    <color name="text_hint">#6E7279</color>
+
+    <!-- Brand -->
+    <color name="indigo">#3F51B5</color>
+    <color name="indigo_dark">#1A237E</color>
+    <color name="indigo_light">#E8EAF6</color>
+
+    <!-- Status -->
+    <color name="status_ok">#1B7F3A</color>
+    <color name="status_warn">#B94A00</color>
+
+    <!-- Danger -->
+    <color name="red">#C62828</color>
+    <color name="red_light">#FFEBEE</color>
 </resources>

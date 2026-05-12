@@ -1,51 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Width is driven by the WindowManager params:
+       Collapsed → 88dp   (small pill, "⚡ TTD" centred)
+       Expanded  → 152dp  (panel with action buttons)             -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:background="@android:color/transparent">
+    android:background="@drawable/suggestion_bar_bg"
+    android:elevation="14dp">
 
-    <!-- Drag handle -->
-    <View
-        android:layout_width="40dp"
-        android:layout_height="4dp"
-        android:layout_gravity="center_horizontal"
-        android:background="#AAFFFFFF"
-        android:layout_marginBottom="2dp" />
-
+    <!-- Header – always visible.  Tap = expand/collapse.  Drag = move. -->
     <LinearLayout
+        android:id="@+id/header_row"
         android:layout_width="match_parent"
-        android:layout_height="54dp"
-        android:background="@drawable/suggestion_bar_bg"
+        android:layout_height="36dp"
+        android:gravity="center"
         android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:padding="2dp"
-        android:elevation="8dp">
+        android:paddingStart="10dp"
+        android:paddingEnd="4dp">
 
-        <HorizontalScrollView
+        <TextView
+            android:id="@+id/tv_bar_label"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:scrollbars="none">
-            
-            <LinearLayout
-                android:id="@+id/container_suggestions"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:paddingStart="8dp"
-                android:paddingEnd="8dp" />
-        </HorizontalScrollView>
+            android:gravity="center"
+            android:text="⚡ TTD"
+            android:textColor="#EEFFFFFF"
+            android:textSize="12sp"
+            android:textStyle="bold"/>
 
+        <!-- Only visible when expanded -->
         <ImageButton
             android:id="@+id/btn_close_bar"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
+            android:layout_width="32dp"
+            android:layout_height="36dp"
+            android:visibility="gone"
+            android:background="@android:color/transparent"
             android:src="@android:drawable/ic_menu_close_clear_cancel"
-            app:tint="@android:color/white" />
-
+            android:tint="#77FFFFFF"
+            android:contentDescription="Close"/>
     </LinearLayout>
+
+    <!-- Expanded content – starts GONE -->
+    <LinearLayout
+        android:id="@+id/container_suggestions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone"
+        android:paddingStart="6dp"
+        android:paddingEnd="6dp"
+        android:paddingBottom="6dp"/>
+
 </LinearLayout>
